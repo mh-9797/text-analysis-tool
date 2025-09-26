@@ -1,0 +1,9 @@
+sample_text.txt
+Artificial intelligence (AI) is intelligence demonstrated by machines,
+as opposed to the natural intelligence displayed by humans. AI is a
+broad field that includes machine learning, computer vision, and natural language
+processing. The goal of AI is to create systems that can perform tasks that
+would normally require human intelligence. This includes tasks such as problem-solving,
+understanding language, and making decisions.
+
+

@@ -1,0 +1,65 @@
+main.py
+Python
+"""
+A simple text analysis tool that counts words, unique words,
+and the frequency of each word in a given text file.
+"""
+
+def analyze_text(file_path):
+    """
+    Analyzes a text file to count words and their frequencies.
+
+    Args:
+        file_path (str): The path to the text file.
+
+    Returns:
+        tuple: A tuple containing:
+            - total_words (int): The total number of words.
+            - unique_words_count (int): The number of unique words.
+            - word_frequency (dict): A dictionary of word frequencies.
+    """
+    word_frequency = {}
+    total_words = 0
+
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            text = f.read()
+            # Split text into words and convert to lowercase for consistent counting
+            words = text.lower().split()
+            total_words = len(words)
+
+            for word in words:
+                # Remove punctuation from words before counting
+                word = word.strip('.,?!;:')
+                if word:  # Ensure word is not an empty string
+                    word_frequency[word] = word_frequency.get(word, 0) + 1
+
+        unique_words_count = len(word_frequency)
+        return total_words, unique_words_count, word_frequency
+
+    except FileNotFoundError:
+        print(f"Error: The file at {file_path} was not found.")
+        return 0, 0, {}
+
+def main():
+    """
+    Main function to run the text analysis tool.
+    """
+    file_name = "sample_text.txt"
+    total_words, unique_words_count, word_frequency = analyze_text(file_name)
+
+    if total_words > 0:
+        print("--- Text Analysis Report ---")
+        print(f"Total Words: {total_words}")
+        print(f"Unique Words: {unique_words_count}")
+        print("\nTop 5 Most Frequent Words:")
+
+        # Sort the dictionary to find the most frequent words
+        sorted_words = sorted(word_frequency.items(), key=lambda item: item[1], reverse=True)
+        for word, count in sorted_words[:5]:
+            print(f"- '{word}': {count} times")
+
+if __name__ == "__main__":
+    main()
+
+
